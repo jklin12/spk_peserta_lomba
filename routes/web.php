@@ -23,11 +23,27 @@ Route::get('/', function () {
     return view('pages.login');
 })->name('login');
 
+Route::get('/register', function () {
+    return view('pages.register');
+})->name('register');
+
 Route::post('/doLogin', [AuthenticateController::class, 'doLogin'])->name('doLogin');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class,'index'])->name('home');
     Route::get('/logout', [AuthenticateController::class,'doLogout'])->name('logout');
+    Route::get('/pendakian/create',function(){
+        return   view('pages.pendakian-form');
+    });
+    Route::get('/pendakian/jadwal',function(){
+        return   view('pages.pendakian-jadwal');
+    });
+    Route::get('/pendakian/detail',function(){
+        return   view('pages.pendakian-detail');
+    });
+    Route::get('/profile',function(){
+        return   view('pages.profile');
+    });
 
     Route::resource('anggota', AnggotaController::class);
     Route::resource('kriteria', KriteriaController::class);
