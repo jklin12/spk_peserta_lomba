@@ -23,11 +23,11 @@
                 @csrf
                 <div class="form-group">
                     <label for="inputNim">Nama Kriteria</label>
-                    <input type="text" class="form-control" id="inputNim" placeholder="Masukan NIM" name="nama_kriteria" value="{{ old('nama_kriteria') }}">
+                    <input type="text" class="form-control" id="inputNim" placeholder="Masukan Nama Kriteria" name="nama_kriteria" value="{{ old('nama_kriteria') }}">
                 </div>
                 <div class="form-group">
                     <label for="inputNama">Bobot Kriteria</label>
-                    <input type="text" class="form-control" id="inputNama" placeholder="Masukan Nama" name="bobot_kriteria" value="{{ old('bobot_kriteria') }}">
+                    <input type="text" class="form-control" id="inputNama" placeholder="Masukan bobot" name="bobot_kriteria" value="{{ old('bobot_kriteria') }}">
                 </div>
              
                 <div class="d-sm-flex justify-content-center mb-2">

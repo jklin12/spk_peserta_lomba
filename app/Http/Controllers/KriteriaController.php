@@ -16,8 +16,13 @@ class KriteriaController extends Controller
     {
         $kriterias = Kriteria::get();
 
+        $jumlah = 0;
+        foreach ($kriterias as $key => $value) {
+            $jumlah += $value->bobot_kriteria;
+        }
 
-        return view('pages.kriteria.index')->with(compact('kriterias'));
+
+        return view('pages.kriteria.index')->with(compact('kriterias','jumlah'));
     }
 
     /**
@@ -73,7 +78,7 @@ class KriteriaController extends Controller
      */
     public function edit($id)
     {
-        $kriteria = Kriteria::find($id)->first();
+        $kriteria = Kriteria::find($id);
         return view('pages.kriteria.edit')->with(compact('kriteria'));
     }
 

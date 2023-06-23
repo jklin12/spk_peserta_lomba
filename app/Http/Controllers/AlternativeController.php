@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Alternative;
 use App\Models\Anggota;
 use App\Models\Kriteria;
+use App\Models\Maskapai;
 use Illuminate\Http\Request;
 
 class AlternativeController extends Controller
@@ -16,22 +17,26 @@ class AlternativeController extends Controller
      */
     public function index()
     {
-        $alternatives = Alternative::leftJoin('anggotas', 'alternatives.id_anggota', '=', 'anggotas.id_anggota')->get();
+        $alternatives = Alternative::leftJoin('maskapais', 'alternatives.id_anggota', '=', 'maskapais.id_maskapai')
+            ->leftJoin('kriterias', 'alternatives.id_kriteria', '=', 'kriterias.id_kriteria')
+            ->get();
+        //dd($alternatives);
         $kriterias = Kriteria::get();
 
 
         $susunAlternatives = [];
         $whereNotIn = [];
         foreach ($alternatives as $key => $value) {
-            $whereNotIn[] = $value['id_anggota'];
-            $susunAlternatives[$value['id_anggota']]['id_anggota'] = $value['id_anggota'];
-            $susunAlternatives[$value['id_anggota']]['nim'] = $value['nim'];
-            $susunAlternatives[$value['id_anggota']]['nama_lengkap'] = $value['nama_lengkap'];
-            $susunAlternatives[$value['id_anggota']]['nilai'][$value['id_kriteria']] = $value['nilai'];
-            $susunAlternatives[$value['id_anggota']]['nilai_bobot'][$value['id_kriteria']] = $value['nilai'] / 5;
+            $whereNotIn[] = $value['id_maskapai'];
+            $susunAlternatives[$value['id_maskapai']]['id_maskapai'] = $value['id_maskapai'];
+            $susunAlternatives[$value['id_maskapai']]['nama_maskapai'] = $value['nama_maskapai'];
+            $susunAlternatives[$value['id_maskapai']]['nilai'][$value['id_kriteria']] = $value['nilai'];
+            $susunAlternatives[$value['id_maskapai']]['nilai_bobot'][$value['id_kriteria']] = $value['nilai'] / 8;
         }
 
-        $anggotas = Anggota::whereNotIn('id_anggota', $whereNotIn)->get();
+
+        $anggotas = Maskapai::whereNotIn('id_maskapai', $whereNotIn)->get();
+
 
         return view('pages.alternativ.index')->with(compact('susunAlternatives', 'kriterias', 'anggotas'));
     }
@@ -45,7 +50,7 @@ class AlternativeController extends Controller
     {
         $kriterias = Kriteria::get();
 
-        $anggota = Anggota::where('id_anggota', $request->id)->first();
+        $anggota = Maskapai::where('id_maskapai', $request->id)->first();
 
 
         return view('pages.alternativ.create')->with(compact('kriterias', 'anggota'));

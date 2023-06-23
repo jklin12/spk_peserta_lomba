@@ -23,12 +23,11 @@
     @endif
     <div class="card mb-4">
         <div class="card-body">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered table-responsive" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th rowspan="2">No</th>
-                        <th rowspan="2">NIM</th>
-                        <th rowspan="2">Nama</th>
+                        <th rowspan="2">Nama Maskapai</th>
                         @foreach($kriterias as $key => $kriteria)
                         <th colspan="2">Kriteria {{ $kriteria->nama_kriteria}}</th>
                         @endforeach
@@ -47,11 +46,23 @@
                     @foreach($susunAlternatives as $key => $alternative)
                     <tr>
                         <td>{{ $loop->iteration}}</td>
-                        <td>{{ $alternative['nim']}}</td>
-                        <td>{{ $alternative['nama_lengkap']}}</td>
+                        <td>{{ $alternative['nama_maskapai']}}</td>
                         @foreach($alternative['nilai_bobot'] as $key => $bobot)
-                        <td>{{ $alternative['nilai'][$key]}}</td>
-                        <td>{{ $bobot}}</td>
+                        <td>
+                            @if($alternative['nilai'][$key]== 1)
+                            Sangat Tidak Sesuai
+                            @elseif($alternative['nilai'][$key] == 2)
+                            Tidak Sesuai
+                            @elseif($alternative['nilai'][$key] == 3)
+                            Sesuai
+                            @elseif($alternative['nilai'][$key] == 4)
+                            Cukup Seusai
+                            @else
+                            Sangat Seusai
+                            @endif
+                        </td>
+                        <td>{{ $alternative['nilai'][$key]}} / 8 = {{ $bobot}}</td>
+                        
                         @endforeach
 
 
@@ -77,11 +88,11 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="selectAnggota">Anggota</label>
+                    <label for="selectAnggota">Maskapai</label>
                     <select class="form-control" id="selectAnggota" name="agama">
                         <option value=""></option>
                         @foreach($anggotas as $key => $value)
-                        <option value="{{ $value->id_anggota}}">{{ $value->nama_lengkap}}</option>
+                        <option value="{{ $value->id_maskapai}}">{{ $value->nama_maskapai}}</option>
                         @endforeach
 
                     </select>

@@ -21,13 +21,13 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th rowspan="2">No</th>
-                        <th rowspan="2">NIM</th>
-                        <th rowspan="2">Nama</th>
+                        <th rowspan="2">No</th> 
+                        <th rowspan="2">Nama Maskapai</th>
+                        <th rowspan="2">Total</th>
                         @foreach($kriterias as $key => $kriteria)
                         <th colspan="3">Kriteria {{ $kriteria->nama_kriteria}}</th>
                         @endforeach
-                        <th rowspan="2">Total</th>
+                      
                     </tr>
                     <tr> 
                         @foreach($kriterias as $key => $kriteria)
@@ -42,15 +42,15 @@
                 <tbody>
                     @foreach($susunAlternatives as $key => $alternative)
                     <tr>
-                        <td>{{ $loop->iteration}}</td>
-                        <td>{{ $alternative['nim']}}</td>
-                        <td>{{ $alternative['nama_lengkap']}}</td>
+                        <td>{{ $loop->iteration}}</td> 
+                        <td>{{ $alternative['nama_maskapai']}}</td>
+                        <td>{{ $alternative['nilai_total']}}</td>
                         @foreach($alternative['nilai_bobot'] as $key => $bobot)
                         <td>{{ $alternative['nilai'][$key]}}</td>
                         <td>{{ $alternative['bobot'][$key]}}</td>
                         <td>{{ $bobot}}</td>
                         @endforeach
-                        <td>{{ $alternative['nilai_total']}}</td>
+                   
 
 
                     </tr>

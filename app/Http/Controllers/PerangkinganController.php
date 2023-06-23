@@ -15,7 +15,7 @@ class PerangkinganController extends Controller
      */
     public function index()
     {
-        $alternatives = Alternative::leftJoin('anggotas', 'alternatives.id_anggota', '=', 'anggotas.id_anggota')
+        $alternatives = Alternative::leftJoin('maskapais', 'alternatives.id_anggota', '=', 'maskapais.id_maskapai')
             ->leftJoin('kriterias', 'alternatives.id_kriteria', '=', 'kriterias.id_kriteria')
             ->get();
         $kriterias = Kriteria::get();
@@ -25,12 +25,12 @@ class PerangkinganController extends Controller
         $whereNotIn = [];
         foreach ($alternatives as $key => $value) {
             $whereNotIn[] = $value['id_anggota'];
-            $susunAlternatives[$value['id_anggota']]['id_anggota'] = $value['id_anggota'];
-            $susunAlternatives[$value['id_anggota']]['nim'] = $value['nim'];
-            $susunAlternatives[$value['id_anggota']]['nama_lengkap'] = $value['nama_lengkap'];
-            $susunAlternatives[$value['id_anggota']]['nilai_bobot'][$value['id_kriteria']] = (($value['nilai'] / 5) * $value->bobot_kriteria) / 100;
-            $susunAlternatives[$value['id_anggota']]['bobot'][$value['id_kriteria']] = $value->bobot_kriteria;
-            $susunAlternatives[$value['id_anggota']]['nilai'][$value['id_kriteria']] = $value['nilai'] / 5;
+            $susunAlternatives[$value['id_maskapai']]['id_maskapai'] = $value['id_maskapai']; 
+            $susunAlternatives[$value['id_maskapai']]['nama_maskapai'] = $value['nama_maskapai'];
+            $susunAlternatives[$value['id_maskapai']]['alternative'][$value['id_kriteria']] = (($value['nilai'] / 8));
+            $susunAlternatives[$value['id_maskapai']]['nilai_bobot'][$value['id_kriteria']] = (($value['nilai'] / 8) * $value->bobot_kriteria) / 100;
+            $susunAlternatives[$value['id_maskapai']]['bobot'][$value['id_kriteria']] = $value->bobot_kriteria;
+            $susunAlternatives[$value['id_maskapai']]['nilai'][$value['id_kriteria']] = $value['nilai'] / 8;
         }
 
         foreach ($susunAlternatives as $key => $value) {
@@ -41,6 +41,7 @@ class PerangkinganController extends Controller
         usort($susunAlternatives, function ($item1, $item2) {
             return $item2['nilai_total'] <=> $item1['nilai_total'];
         });
+        //dd($susunAlternatives);
 
 
         return view('pages.perangkingan.index')->with(compact('susunAlternatives', 'kriterias'));

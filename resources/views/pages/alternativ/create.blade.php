@@ -29,9 +29,9 @@
                 <ul class="nav">
                     @foreach($kriterias as $key => $kriteria)
                     <li class="nav-item">
-                        <a class="nav-link" href="#step-{{$key}}">
-                            <div class="num">C{{ $loop->iteration }}</div>
-                            {{$kriteria->nama_kriteria}}
+                        <a class="nav-link"   href="#step-{{$key}}">
+                            <div class="num"   >C{{ $loop->iteration }}</div>
+                        
                         </a>
                     </li>
                     @endforeach
@@ -43,7 +43,7 @@
                     @csrf
                     @foreach($kriterias as $key => $kriteria)
                     <div id="step-{{ $key }}" class="tab-pane" role="tabpanel" aria-labelledby="step-{{ $key }}">
-                        <span>Bagaimana {{ $kriteria->nama_kriteria.' '.$anggota->nama_lengkap }} ?</span>
+                        <span>Bagaimana {{ $kriteria->nama_kriteria.' '.$anggota->nama_maskapai }} ?</span>
                         <form action="" class="kriteria-form">
                             <div class="mx-2 my-2">
                                 <div class="form-check">
@@ -127,7 +127,7 @@
 <script>
     function onConfirm() {
         var postVal = new FormData();
-        postVal.append('id_anggota', '<?= $anggota->id_anggota ?>');
+        postVal.append('id_anggota', '<?= $anggota->id_maskapai ?>');
         $('input[type=radio]').each(function() {
 
             if ($(this).prop("checked")) {
@@ -201,7 +201,7 @@
         });
 
         $('#smartwizard').smartWizard({
-            theme: 'arrows',
+            theme: 'round',
             toolbar: {
                 showNextButton: true, // show/hide a Next button
                 showPreviousButton: true, // show/hide a Previous button

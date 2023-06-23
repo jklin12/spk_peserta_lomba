@@ -5,6 +5,7 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\MaskapaiController;
 use App\Http\Controllers\PerangkinganController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kriteria', KriteriaController::class);
     Route::resource('alternative', AlternativeController::class);
     Route::resource('perangkingan', PerangkinganController::class);
+    Route::resource('maskapai', MaskapaiController::class);
 });

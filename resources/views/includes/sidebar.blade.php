@@ -20,9 +20,9 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
     <li class="nav-item" id="nav-anggota">
-        <a class="nav-link" href="{{ route('anggota.index') }}">
-            <i class="fas fa-fw fa-users"></i>
-            <span>Data Anggota</span></a>
+        <a class="nav-link" href="{{ route('maskapai.index') }}">
+            <i class="fas fa-fw fa-plane"></i>
+            <span>Data Maskapai</span></a>
     </li>
     <li class="nav-item" id="nav-kriteria">
         <a class="nav-link" href="{{ route('kriteria.index') }}">

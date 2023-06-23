@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'name' => 'Sistem Pendukung Keputusan Calon Peserta Pertandingan Pencaksilat Merapati Putih',
-    'name_sort' => 'SPK CPPPMP',
+    'name' => 'SPK Pemilihan Maskapai Tervaforit',
+    'name_sort' => 'SPK PMT',
     'institution' => 'Institute Teknologi Dirgantara Adisutjipto',
     'institution_short' => 'IDTA',
 ];
